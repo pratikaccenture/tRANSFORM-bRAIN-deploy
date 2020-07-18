@@ -86,6 +86,8 @@ resource "azurerm_windows_virtual_machine" "Terratest" {
   admin_password      = "P@$$w0rd1234!"
   tags = {
     Name = "Pratik"
+    environment = "Terraform Demo"
+    Build-ID          = var.buildid
   }
   network_interface_ids = [
     azurerm_network_interface.Terratest[count.index].id,
