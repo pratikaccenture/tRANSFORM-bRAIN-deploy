@@ -1,4 +1,6 @@
-#Trigger for Teeraform Pipeline
+#Docker
+# Build a Docker image 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
 - master
@@ -11,10 +13,13 @@ variables:
 
 stages:
 - stage: Provision
-  displayName: 'Terraforming Azure Resource on Pratik's command...'
+  displayName: 'Terraforming by Pratik...'
+  dependsOn: Build
   jobs:
   - job: Provision
     displayName: 'Provisioning Container Instance'
+    pool:
+      vmImage: 'ubuntu-latest'
     variables: 
     - group: TeraformEnvVars
     steps:
@@ -30,5 +35,4 @@ stages:
         ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
         ARM_TENANT_ID: $(ARM_TENANT_ID)
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-        TF_VAR_imagebuild: $(tag)
         
