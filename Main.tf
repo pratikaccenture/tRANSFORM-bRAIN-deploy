@@ -66,6 +66,7 @@ resource "azurerm_network_security_group" "Terratest" {
     tags = {
         environment = "Terraform Demo"
         owner       = "Pratik"
+        Build-ID          = var.buildid
     }
 }
 
@@ -111,6 +112,11 @@ variable "region" {
 
 variable "network_address_space" {
   default = ["10.0.0.0/16"]
+}
+
+variable "buildid" {
+ type     = string
+ description = "Azure build ID"
 }
 
 variable "subnet_address_space" {

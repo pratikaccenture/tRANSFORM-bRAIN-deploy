@@ -1,6 +1,6 @@
-#Docker
-# Build a Docker image 
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+#Initiate yml with azure pipeline
+#Calls terraform build job
+#developed by Pratik
 
 trigger:
 - master
@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  tag: 'AZ-$(Build.BuildId)'
 
 stages:
 - stage: Provision
@@ -26,7 +26,7 @@ stages:
         set -e
 
         terraform init -input=false
-        terraform destroy -input=false -auto-approve
+        terraform apply -input=false -auto-approve
       name: 'RunTerraform'
       displayName: 'Run Terraform'
       env:
@@ -34,4 +34,5 @@ stages:
         ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
         ARM_TENANT_ID: $(ARM_TENANT_ID)
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+        TF_VAR_buildid: $tag
         
