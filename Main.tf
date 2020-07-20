@@ -13,19 +13,19 @@ terraform {
 }
 
 resource "azurerm_resource_group" "Terratest" {
-  name     = "Terraform_test"
+  name     = "Terraform-demo"
   location = var.region
 }
 
 resource "azurerm_virtual_network" "Terratest" {
-  name                = "Terra-vnet"
+  name                = "DemoTerravnet"
   address_space       = var.network_address_space
   location            = azurerm_resource_group.Terratest.location
   resource_group_name = azurerm_resource_group.Terratest.name
 }
 
 resource "azurerm_subnet" "Terratest" {
-  name                 = "Terra-subnet"
+  name                 = "DemoTerrasubnet"
   resource_group_name  = azurerm_resource_group.Terratest.name
   virtual_network_name = azurerm_virtual_network.Terratest.name
   address_prefix       = var.subnet_address_space
@@ -33,8 +33,8 @@ resource "azurerm_subnet" "Terratest" {
 
 resource "azurerm_network_interface" "Terratest" {
   count               = var.instance_count
-  name                = "Terra-nic-${count.index + 1}"
-  #name                = "Terra-nic"
+  name                = "DemoTerranic-${count.index + 1}"
+  #name                = "DemoTerranic"
   location            = azurerm_resource_group.Terratest.location
   resource_group_name = azurerm_resource_group.Terratest.name
 
@@ -47,7 +47,7 @@ resource "azurerm_network_interface" "Terratest" {
 
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "Terratest" {
-    name                = "Terra-NSG"
+    name                = "DemoTerraNSG"
     location            = azurerm_resource_group.Terratest.location
     resource_group_name = azurerm_resource_group.Terratest.name
     
@@ -78,7 +78,7 @@ resource "azurerm_network_interface_security_group_association" "Terratest" {
 
 resource "azurerm_windows_virtual_machine" "Terratest" {
   count               = var.instance_count
-  name                = "Terra-Pratik-${count.index + 1}"
+  name                = "DemoTerraVM-${count.index + 1}"
   resource_group_name = azurerm_resource_group.Terratest.name
   location            = azurerm_resource_group.Terratest.location
   size                = "Standard_F2"
