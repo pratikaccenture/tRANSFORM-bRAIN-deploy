@@ -85,7 +85,7 @@ resource "azurerm_windows_virtual_machine" "Terratest" {
   admin_username      = "adminuser"
   admin_password      = "P@$$w0rd1234!"
   tags = {
-    Name = "Pratik"
+    Name = "Pratik test"
     environment = "Terraform Demo"
     Build-ID          = var.buildid
   }
