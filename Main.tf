@@ -1,5 +1,5 @@
 provider "azurerm" {
-    version = "2.5.0"
+    version = "2.5.0"  
     features {}
 }
 
@@ -126,5 +126,5 @@ variable "subnet_address_space" {
 }
 
 variable "instance_count" {
-  default = 1
+  default = 2
 }
