@@ -1,6 +1,6 @@
 #Initiate yml with azure pipeline
 #Calls terraform build job
-#developed by Pratik
+#developed by Pratik C
 
 trigger:
 - master
